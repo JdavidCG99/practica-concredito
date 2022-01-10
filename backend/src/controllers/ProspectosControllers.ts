@@ -1,6 +1,6 @@
 import {Request , Response } from 'express';
 import pool from '../database';
-import relacion from "./ProspectoDocumentoController";
+
 class ProspectosController{
 
     
