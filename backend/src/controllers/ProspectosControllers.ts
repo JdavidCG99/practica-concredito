@@ -49,60 +49,33 @@ class ProspectosController{
             delete datos['documentos'];
             delete datos['nombreDocumentos'];
             
-            await pool.query('INSERT INTO prospecto SET ?' , [datos] , function(error,results){
-                if (error) {
-                    console.log(error);
-                    res.json({message: 'Error al guardar'});
-                }else{
-                    console.log("Prospecto agregado");
-                    //relacion.setProspecto(results['insertId']);
-                    //console.log(results['insertId']);
-                    
-                    //return 1;
-                }
-            });
-            //console.log(v);
-            
-            //select max(id) from prof
-            //console.log("estos es la respuesta : " + p);
-            
+            const guardado = () => {
+                return new Promise((resolve , reject) => {
+                    pool.query('INSERT INTO prospecto SET ?' , [datos] , function(error,results){
+                        if (error) {
+                            console.log(error);
+                            res.json({message: 'Error al guardar'});
+                        }else{
+                            console.log("Prospecto agregado");
+                            resolve(results['insertId']);
+                        }
+                    });
+                });
+            } 
+            const idSave = await guardado();
+            console.log("porsp guardado :" + idSave);     
 
             for(var y = 1; y <= nombreDocumentos.length; y++){
-                var documentoParaGuardar = {"nombre": nombreDocumentos[y-1],"referencia": documentos[y-1]};
-                //console.log(documentoParaGuardar);
-                pool.query('INSERT INTO documento SET ?' , [documentoParaGuardar] , function(error,results){
+                const documentoParaGuardar = {"nombre": nombreDocumentos[y-1],"referencia": documentos[y-1],"idProspecto": idSave};
+
+                pool.query('INSERT INTO documentos SET ?' , [documentoParaGuardar] , function(error,results){
                     if (error) {
                         console.log(error);
                         res.json({message: 'Error al guardar documento'});
                     }else{
                         console.log("Documento agregado");
-
-                        pool.query('SELECT MAX(idProspecto) as idProspecto,MAX(idDocumento) as idDocumento FROM prospecto,Documento', function(error,results2,fields){
-                            if (error){
-                                console.log(error);
-                                res.json({message: 'Error al obtener datos'});
-                            }
-                            console.log(results2[0]['idProspecto']+1);
-                            console.log(results['insertId']);
-                            //res.json(results);
-
-                            var relacion = {
-                                "idProspecto": results2[0]['idProspecto']+1,
-                                "idDocumento": results2[0]['idDocumento']+y
-                            };
-                            console.log(relacion);
-                            pool.query('INSERT INTO documentoprospecto SET ?' , [relacion] , function(error,results){
-                                if (error) {
-                                    console.log(error);
-                                }else{
-                                    console.log("Documento agregado");
-                                }
-                            });
-                        }); 
-                        //relacion.setDocumento(results['insertId']);
                     }
                 });
-                //SELECT MAX(idProspecto) as idProspecto,MAX(idDocumento) as idDocumento FROM prospecto,documento
             }
             res.json({message: 'Prospecto guardado con exito'});  
 
@@ -113,8 +86,29 @@ class ProspectosController{
 
     public async update  (req :Request, res : Response) : Promise<void>{
         try{
+            var datos = req.body;
+            await pool.query('UPDATE prospecto SET ? WHERE idProspecto = ?' , [datos ,req.params.id] , function(error,results){
+                if (error) {
+                    console.log(error);
+                    res.json({message: 'Error al actualizar'});
+                }else{
+                    console.log("Prospecto actualizado");
+                    res.json({message: 'Prospecto actualizado con exito'}); 
+                }
+            });
+        }catch(error){
+            res.json({message: 'Error en el servidor'}); 
+        }
+    }
+
+    public async evaluar(req :Request, res : Response) : Promise<void>{
+        try{
+            var datos = req.body;
             console.log(req.body);
-            await pool.query('UPDATE prospecto SET ?' , [req.body] , function(error,results){
+            console.log(datos);
+            var evaluado = {evaluado: "1"};
+            datos = Object.assign(datos,evaluado);
+            await pool.query('UPDATE prospecto SET ? WHERE idProspecto = ?' , [datos ,req.params.id] , function(error,results){
                 if (error) {
                     console.log(error);
                     res.json({message: 'Error al actualizar'});

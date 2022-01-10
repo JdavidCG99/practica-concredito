@@ -4,12 +4,12 @@ CREATE DATABASE ProspectosClientes;
 use ProspectosClientes;
 
 create table estatus(
- idEstatus PRIMARY KEY AUTO_INCREMENT,
+ idEstatus int PRIMARY KEY AUTO_INCREMENT,
  nombre varchar(50)
 );
 
 create table prospecto(
- idProspecto PRIMARY KEY AUTO_INCREMENT,
+ idProspecto int PRIMARY KEY AUTO_INCREMENT,
  nombre varchar(100) not null,
  primerApellido varchar(100) not null,
  segundoApellido varchar(100) null,
@@ -19,29 +19,25 @@ create table prospecto(
  codigoPostal varchar(10) not null,
  telefono varchar(14) not null,
  RFC varchar(13) not null,
- idEstatus int not null,
+ idEstatus int DEFAULT 1,
  observaciones varchar(600) null,
- evaluado char(1) null,
+ evaluado char(1) DEFAULT 0,
  created_at timestamp default CURRENT_TIMESTAMP,
     
 FOREIGN KEY(idEstatus) REFERENCES Estatus(idEstatus)
 );
 
-create table documento(
-idDocumento  PRIMARY KEY AUTO_INCREMENT,
+create table documentos(
+idDocumento int PRIMARY KEY AUTO_INCREMENT,
 nombre varchar(150) not null,
 referencia varchar(190) null,
-created_at timestamp default CURRENT_TIMESTAMP
-);
-
-create table documentoProspecto(
 idProspecto int not null,
-idDocumento int not null,
-
-FOREIGN KEY(idProspecto) REFERENCES Prospecto(idProspecto),
-FOREIGN KEY(idDocumento) REFERENCES Documento(idDocumento)
+created_at timestamp default CURRENT_TIMESTAMP,
+    
+FOREIGN KEY(idProspecto) REFERENCES Prospecto(idProspecto)
 );
 
-insert into Estatus values('Enviado');
-insert into Estatus values('Autorizado');
-insert into Estatus values('Rechazado');
+
+insert into Estatus values(1,'Enviado');
+insert into Estatus values(2,'Autorizado');
+insert into Estatus values(3,'Rechazado');

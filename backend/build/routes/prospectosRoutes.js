@@ -11,6 +11,7 @@ class ProspectosRoutes {
         this.router.get('/', ProspectosControllers_1.prospectosController.index);
         this.router.post('/', ProspectosControllers_1.prospectosController.store);
         this.router.put('/:id', ProspectosControllers_1.prospectosController.update);
+        this.router.put('/evaluar/:id', ProspectosControllers_1.prospectosController.evaluar);
         this.router.get('/:id', ProspectosControllers_1.prospectosController.show);
     }
 }
