@@ -1,5 +1,5 @@
 import {Router} from 'express';
-
+import { prospectosController } from '../controllers/ProspectosControllers';
 class ProspectosRoutes{
     public router: Router = Router();
 
@@ -8,7 +8,10 @@ class ProspectosRoutes{
     }
 
     config(): void{
-        this.router.get('/', (req , res) => res.send('hello'));
+        this.router.get('/',prospectosController.index);
+        this.router.post('/',prospectosController.store);
+        this.router.put('/:id',prospectosController.update);
+        this.router.get('/:id',prospectosController.show);
     }
 }
 

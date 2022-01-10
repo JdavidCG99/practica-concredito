@@ -4,12 +4,12 @@ CREATE DATABASE ProspectosClientes;
 use ProspectosClientes;
 
 create table estatus(
- idEstatus int not null AUTO_INCREMENT PRIMARY KEY,
+ idEstatus PRIMARY KEY AUTO_INCREMENT,
  nombre varchar(50)
 );
 
 create table prospecto(
- idProspecto int not null AUTO_INCREMENT PRIMARY KEY,
+ idProspecto PRIMARY KEY AUTO_INCREMENT,
  nombre varchar(100) not null,
  primerApellido varchar(100) not null,
  segundoApellido varchar(100) null,
@@ -28,7 +28,7 @@ FOREIGN KEY(idEstatus) REFERENCES Estatus(idEstatus)
 );
 
 create table documento(
-idDocumento int not null AUTO_INCREMENT PRIMARY KEY,
+idDocumento  PRIMARY KEY AUTO_INCREMENT,
 nombre varchar(150) not null,
 referencia varchar(190) null,
 created_at timestamp default CURRENT_TIMESTAMP
