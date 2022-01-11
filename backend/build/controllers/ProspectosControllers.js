@@ -18,7 +18,7 @@ class ProspectosController {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield database_1.default.query('SELECT * FROM prospecto', function (error, results, fields) {
+                yield database_1.default.query('SELECT p.*,e.nombre as nombreEstatus FROM prospecto as p inner join estatus as e on p.idEstatus = e.idEstatus', function (error, results, fields) {
                     if (error) {
                         console.log(error);
                         res.json({ message: 'Error al obtener datos' });

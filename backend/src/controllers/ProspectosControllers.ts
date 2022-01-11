@@ -7,7 +7,7 @@ class ProspectosController{
     public async index  (req :Request, res : Response) : Promise<void>{
         
         try{
-            await pool.query('SELECT * FROM prospecto', function(error,results,fields){
+            await pool.query('SELECT p.*,e.nombre as nombreEstatus FROM prospecto as p inner join estatus as e on p.idEstatus = e.idEstatus', function(error,results,fields){
                 if (error){
                     console.log(error);
                     res.json({message: 'Error al obtener datos'});

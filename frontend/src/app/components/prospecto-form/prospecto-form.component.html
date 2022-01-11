@@ -1,0 +1,40 @@
+<div class="container p-4">
+  <div class="col-md-6 offset-md-3">
+    <div class="card">
+      <div class="card-body">
+        <form>
+          <div class="form-group p-2">
+            <input type="text" name="nombre" [(ngModel)]="prospecto.nombre" placeholder="Nombre" class="form-control">
+          </div>
+          <div class="form-group p-2">
+            <input type="text" name="primerApellido" [(ngModel)]="prospecto.primerApellido" placeholder="Primer Apellido" class="form-control">
+          </div>
+          <div class="form-group p-2">
+            <input type="text" name="segundoApellido" [(ngModel)]="prospecto.segundoApellido" placeholder="Segundo Apellido" class="form-control">
+          </div>
+          <div class="form-group p-2">
+            <input type="text" name="calle" [(ngModel)]="prospecto.calle" placeholder="Calle" class="form-control">
+          </div>
+          <div class="form-group p-2">
+            <input type="number" name="numero" [(ngModel)]="prospecto.numero" placeholder="Numero" class="form-control">
+          </div>
+          <div class="form-group p-2">
+            <input type="text" name="colonia" [(ngModel)]="prospecto.colonia" placeholder="Colonia" class="form-control">
+          </div>
+          <div class="form-group p-2">
+            <input type="number" name="codigoPostal" [(ngModel)]="prospecto.codigoPostal" placeholder="Codigo Postal" class="form-control">
+          </div>
+          <div class="form-group p-2">
+            <input type="number" name="telefono" [(ngModel)]="prospecto.telefono" placeholder="Telefono" class="form-control">
+          </div>
+          <div class="form-group p-2">
+            <input type="text" name="RFC" [(ngModel)]="prospecto.RFC" placeholder="RFC" class="form-control">
+          </div>
+          <div class="d-grid gap-2 p-2" (click)="saveProspecto()">
+            <button class="btn btn-primary" type="button">Guardar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
