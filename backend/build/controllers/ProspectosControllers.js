@@ -118,7 +118,7 @@ class ProspectosController {
             try {
                 var datos = req.body;
                 console.log(datos);
-                yield database_1.default.query('UPDATE prospecto SET ? WHERE idProspecto = ?', [datos, req.params.id], function (error, results) {
+                yield database_1.default.query('UPDATE prospecto SET idEstatus = ? WHERE idProspecto = ?', [datos, req.params.id], function (error, results) {
                     if (error) {
                         console.log(error);
                         res.json({ message: 'Error al actualizar' });
