@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { NavegationComponent } from './components/navegation/navegation.component';
 import { ProspectoFormComponent } from './components/prospecto-form/prospecto-form.component';
 import { ProspectosListComponent } from './components/prospectos-list/prospectos-list.component';
+import { VerEvaluarComponent } from './components/ver-evaluar/ver-evaluar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavegationComponent,
     ProspectoFormComponent,
-    ProspectosListComponent
+    ProspectosListComponent,
+    VerEvaluarComponent
   ],
   imports: [
     BrowserModule,

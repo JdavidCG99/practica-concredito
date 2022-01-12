@@ -4,11 +4,12 @@ export interface Prospecto{
     primerApellido: string;
     segundoApellido: string;
     calle: string;
-    numero: number;
+    numero: string;
     colonia: string;
     codigoPostal: string;
-    telefono: number;
+    telefono: string;
     RFC: string;
     nombreDocumentos?: any;
     documentos?: any;
+    observaciones?: string;
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
-import { Prospecto } from 'src/app/models/prospecto';
 import { ProspectosService } from '../../services/prospectos.service';
 @Component({
   selector: 'app-prospectos-list',

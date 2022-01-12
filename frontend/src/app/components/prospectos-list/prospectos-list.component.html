@@ -15,7 +15,7 @@
     </thead>
     <tbody>
       <!--(click) = "verProspecto(prospecto.idProspecto)"-->
-      <tr *ngFor="let prospecto of prospectos">
+      <tr *ngFor="let prospecto of prospectos"  [routerLink]="['/prospectos/ver-evaluar' , prospecto.idProspecto]">
         <td>{{prospecto.nombre}}</td>
         <td>{{prospecto.primerApellido}}</td>
         <td>{{prospecto.segundoApellido}}</td>

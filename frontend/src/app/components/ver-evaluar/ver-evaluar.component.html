@@ -1,0 +1,85 @@
+<div class="container p-4">
+  <div class="col-md-6 offset-md-3">
+
+    <div class="card">
+      <div class="card-body" style="display: inline-block;">
+        <div class="col-md-6" style="display: inline-block;">
+          <span style="font-size: 20px">Evaluar</span> <br><br>
+          <select class="form-select form-select mb-3" aria-label=".form-select-lg example" [(ngModel)]="newEstatus">
+            <option value="0" selected>Seleccionar Estatus</option>
+            <option value="1">Enviado</option>
+            <option value="2">Autorizado</option>
+            <option value="3">Rechazado</option>
+
+          </select>
+        </div>
+        <div class="col-md-4" style="display: inline-block;">
+          <div class="d-grid gap-2 p-2" (click)="saveEstatus(prospecto.idProspecto)">
+            <button class="btn btn-primary" type="button">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="card">
+      <div class="card-body">
+        <span style="font-size: 20px">Datos del prospecto</span> <br><br>
+        <form>
+          <div class="form-group p-2">
+            <input type="text" name="nombre" [(ngModel)]="prospecto.nombre" placeholder="Nombre" class="form-control" readonly>
+          </div>
+          <div class="form-group p-2">
+            <input type="text" name="primerApellido" [(ngModel)]="prospecto.primerApellido" placeholder="Primer Apellido" class="form-control" readonly>
+          </div>
+          <div class="form-group p-2">
+            <input type="text" name="segundoApellido" [(ngModel)]="prospecto.segundoApellido" placeholder="Segundo Apellido" class="form-control" readonly>
+          </div>
+          <div class="form-group p-2">
+            <input type="text" name="calle" [(ngModel)]="prospecto.calle" placeholder="Calle" class="form-control" readonly>
+          </div>
+          <div class="form-group p-2">
+            <input type="number" name="numero" [(ngModel)]="prospecto.numero" placeholder="Numero" class="form-control" readonly>
+          </div>
+          <div class="form-group p-2">
+            <input type="text" name="colonia" [(ngModel)]="prospecto.colonia" placeholder="Colonia" class="form-control" readonly>
+          </div>
+          <div class="form-group p-2">
+            <input type="number" name="codigoPostal" [(ngModel)]="prospecto.codigoPostal" placeholder="Codigo Postal" class="form-control" readonly>
+          </div>
+          <div class="form-group p-2">
+            <input type="number" name="telefono" [(ngModel)]="prospecto.telefono" placeholder="Telefono" class="form-control" readonly>
+          </div>
+          <div class="form-group p-2">
+            <input type="text" name="RFC" [(ngModel)]="prospecto.RFC" placeholder="RFC" class="form-control" readonly>
+          </div>
+          <div class="form-group p-2">
+            <input type="text" name="estatus" [(ngModel)]="prospecto.nombreEstatus" placeholder="Estatus" class="form-control" readonly>
+          </div>
+          <div class="form-group p-2">
+            <input type="text" name="observaciones" [(ngModel)]="prospecto.observaciones" placeholder="Observaciones" class="form-control">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <span style="font-size: 20px">Documentos</span> <br><br>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Documento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--(click) = "verProspecto(prospecto.idProspecto)"-->
+            <tr *ngFor="let doc of documentos">
+              <td>{{doc.nombre}}</td>
+              <td><a>{{doc.referencia}}</a></td>
+            </tr>
+          </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>

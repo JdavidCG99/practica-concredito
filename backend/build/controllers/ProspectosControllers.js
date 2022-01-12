@@ -35,7 +35,7 @@ class ProspectosController {
     show(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                yield database_1.default.query('SELECT * FROM prospecto WHERE idProspecto = ?', [req.params.id], function (error, results, fields) {
+                yield database_1.default.query('SELECT p.*,e.nombre as nombreEstatus FROM prospecto as p inner join estatus as e on p.idEstatus = e.idEstatus WHERE p.idProspecto = ?', [req.params.id], function (error, results, fields) {
                     if (error) {
                         console.log(error);
                         res.json({ message: 'Error al obtener datos' });
@@ -44,7 +44,25 @@ class ProspectosController {
                     if (results.length > 0) {
                         res.json(results[0]);
                     }
-                    res.status(404).json({ message: "Prospecto no encontrado" });
+                    //res.status(404).json({message: "Prospecto no encontrado"});
+                });
+            }
+            catch (error) {
+                res.json({ message: 'Error en el servidor' });
+            }
+        });
+    }
+    getDocumentos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                database_1.default.query('SELECT * FROM documentos WHERE idProspecto = ? ', [req.params.id], function (error, results) {
+                    if (error) {
+                        console.log(error);
+                        res.json({ message: 'Error al consultar' });
+                    }
+                    else {
+                        res.json(results);
+                    }
                 });
             }
             catch (error) {
@@ -99,6 +117,7 @@ class ProspectosController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 var datos = req.body;
+                console.log(datos);
                 yield database_1.default.query('UPDATE prospecto SET ? WHERE idProspecto = ?', [datos, req.params.id], function (error, results) {
                     if (error) {
                         console.log(error);
@@ -132,6 +151,23 @@ class ProspectosController {
                         console.log("Prospecto actualizado");
                         res.json({ message: 'Prospecto actualizado con exito' });
                     }
+                });
+            }
+            catch (error) {
+                res.json({ message: 'Error en el servidor' });
+            }
+        });
+    }
+    estatus(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield database_1.default.query('SELECT * FROM estatus', function (error, results, fields) {
+                    if (error) {
+                        console.log(error);
+                        res.json({ message: 'Error al obtener datos' });
+                    }
+                    console.log(results);
+                    res.json(results);
                 });
             }
             catch (error) {

@@ -9,10 +9,12 @@ class ProspectosRoutes {
     }
     config() {
         this.router.get('/', ProspectosControllers_1.prospectosController.index);
+        this.router.get('/estatus', ProspectosControllers_1.prospectosController.estatus);
         this.router.post('/', ProspectosControllers_1.prospectosController.store);
         this.router.put('/:id', ProspectosControllers_1.prospectosController.update);
         this.router.put('/evaluar/:id', ProspectosControllers_1.prospectosController.evaluar);
         this.router.get('/:id', ProspectosControllers_1.prospectosController.show);
+        this.router.get('/documents/:id', ProspectosControllers_1.prospectosController.getDocumentos);
     }
 }
 const prospectosRoutes = new ProspectosRoutes();

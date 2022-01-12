@@ -19,11 +19,23 @@ export class ProspectosService {
     return this.http.get(`${this.API_URI}/prospectos/${id}`);
   }
 
+  getDocumentos( id:string ){
+    return this.http.get(`${this.API_URI}/prospectos/documents/${id}`);
+  }
+
+  getEstatus(){
+    return this.http.get(`${this.API_URI}/prospectos/estatus`);
+  }
+
   saveProspecto( prospecto: Prospecto ){
     return this.http.post(`${this.API_URI}/prospectos` , prospecto);
   }
 
-  evaluarProspecto( id: string , newEstatus: any) {
+  upProspecto( id:string , prospecto: Prospecto ){
+    return this.http.put(`${this.API_URI}/prospectos/${id}` , prospecto);
+  }
+
+  evaluarProspecto( id: string , newEstatus: string) {
     return this.http.put(`${this.API_URI}/prospectos/evaluar/${id}`, newEstatus);
   }
 

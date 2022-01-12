@@ -24,7 +24,7 @@ class ProspectosController{
     public async show  (req :Request, res : Response) : Promise<any>{
 
         try{
-            await pool.query('SELECT * FROM prospecto WHERE idProspecto = ?', [req.params.id] , function(error,results,fields){
+            await pool.query('SELECT p.*,e.nombre as nombreEstatus FROM prospecto as p inner join estatus as e on p.idEstatus = e.idEstatus WHERE p.idProspecto = ?', [req.params.id] , function(error,results,fields){
                 if (error){
                     console.log(error);
                     res.json({message: 'Error al obtener datos'});
@@ -33,12 +33,27 @@ class ProspectosController{
                 if(results.length > 0){
                     res.json(results[0]);
                 }
-                res.status(404).json({message: "Prospecto no encontrado"});
+                //res.status(404).json({message: "Prospecto no encontrado"});
             });
         }catch(error){
             res.json({message: 'Error en el servidor'}); 
         }
 
+    }
+
+    public async getDocumentos (req :Request, res : Response) : Promise<void>{
+        try{
+            pool.query('SELECT * FROM documentos WHERE idProspecto = ? ', [req.params.id] , function(error,results){
+                if (error) {
+                    console.log(error);
+                    res.json({message: 'Error al consultar'});
+                }else{
+                    res.json(results);
+                }
+            });
+        }catch(error){
+            res.json({message: 'Error en el servidor'});
+        }
     }
 
     public async store  (req :Request, res : Response) : Promise<void>{
@@ -87,6 +102,8 @@ class ProspectosController{
     public async update  (req :Request, res : Response) : Promise<void>{
         try{
             var datos = req.body;
+            console.log(datos);
+            
             await pool.query('UPDATE prospecto SET ? WHERE idProspecto = ?' , [datos ,req.params.id] , function(error,results){
                 if (error) {
                     console.log(error);
@@ -120,6 +137,23 @@ class ProspectosController{
         }catch(error){
             res.json({message: 'Error en el servidor'}); 
         }
+    }
+
+    public async estatus  (req :Request, res : Response) : Promise<void>{
+        
+        try{
+            await pool.query('SELECT * FROM estatus', function(error,results,fields){
+                if (error){
+                    console.log(error);
+                    res.json({message: 'Error al obtener datos'});
+                }
+                console.log(results);
+                res.json(results);
+            });
+        }catch(error){
+            res.json({message: 'Error en el servidor'}); 
+        }
+
     }
    
 }

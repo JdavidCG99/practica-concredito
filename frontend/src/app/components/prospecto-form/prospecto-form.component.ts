@@ -18,10 +18,10 @@ export class ProspectoFormComponent implements OnInit {
     primerApellido: '',
     segundoApellido: '',
     calle: '',
-    numero: 0,
+    numero: '',
     colonia: '',
     codigoPostal: '',
-    telefono: 0,
+    telefono: '',
     RFC: '',
     nombreDocumentos: [],
     documentos: []
